@@ -49,7 +49,7 @@
   .tables {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    height: 80vh;
+    height: 90vh;
     width: 100%;
     grid-column-gap: 1em;
   }

@@ -22,59 +22,58 @@
 </template>
 
 <script>
-  import PlayPauseButton from "./PlayPauseButton";
-  export default {
-    name: "DiffsList",
-    components: {PlayPauseButton},
-    data () {
-      return {
-        diffsBids: [],
-        diffsAsks: [],
+import PlayPauseButton from './PlayPauseButton'
+export default {
+  name: 'DiffsList',
+  components: { PlayPauseButton },
+  data () {
+    return {
+      diffsBids: [],
+      diffsAsks: []
 
+    }
+  },
+  mounted () {
+    this.startListenData()
+    this.startListenSymbolChange()
+  },
+  methods: {
+    handleClick (payload) {
+      if (payload.isPaused) {
+        this.stopListen()
+      } else {
+        this.startListenData()
+        console.log('make this stop!!!')
       }
     },
-    mounted() {
-      this.startListenData()
-      this.startListenSymbolChange()
+    dataListener (payload) {
+      const lastDiffBids = payload.b
+      const lastDiffAsks = payload.a
+      if (this.diffsAsks.length === 10) {
+        this.diffsAsks.pop()
+      }
+      if (this.diffsBids.length === 10) {
+        this.diffsBids.pop()
+      }
+      this.diffsBids.unshift(lastDiffBids)
+      this.diffsAsks.unshift(lastDiffAsks)
     },
-    methods: {
-      handleClick (payload){
-        if (payload.isPaused) {
-          this.stopListen()
-        }
-        else {
-          this.startListenData()
-          console.log('make this stop!!!')
-        }
-      },
-      dataListener (payload) {
-        const lastDiffBids = payload.b
-        const lastDiffAsks = payload.a
-        if (this.diffsAsks.length === 10) {
-          this.diffsAsks.pop()
-        }
-        if (this.diffsBids.length === 10) {
-          this.diffsBids.pop()
-        }
-        this.diffsBids.unshift(lastDiffBids)
-        this.diffsAsks.unshift(lastDiffAsks)
-      },
-      startListenSymbolChange() {
-        this.$core.eventBus.$on('symbolChanged',  this.refresh)
-      },
+    startListenSymbolChange () {
+      this.$core.eventBus.$on('symbolChanged', this.refresh)
+    },
     stopListen () {
       this.$core.eventBus.$off('recievedData')
     },
     startListenData () {
       this.$core.eventBus.$on('recievedData', this.dataListener)
     },
-      refresh () {
-        this.diffsBids = []
-        this.diffsAsks= []
-      }
+    refresh () {
+      this.diffsBids = []
+      this.diffsAsks = []
+    }
 
-      }}
-
+  }
+}
 
 </script>
 

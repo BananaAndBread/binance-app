@@ -1,5 +1,5 @@
 <template>
-  <div :class='{button: true, paused: isPaused}' @click="revertState">
+  <div :class='{button: true, "button--paused": isPaused}' @click="revertState">
     <div class="button__content">
       {{buttonState}}
     </div>
@@ -7,25 +7,25 @@
 </template>
 
 <script>
-  export default {
-    name: "PlayPauseButton",
-    data () {
-      return {
-        isPaused: false
-      }
-    },
-    methods: {
-      revertState() {
-        this.isPaused = !this.isPaused
-        this.$emit('clicked', {isPaused : this.isPaused})
-      },
-    },
-    computed: {
-      buttonState() {
-        return this.isPaused?'Record':'Pause'
-      }
+export default {
+  name: 'PlayPauseButton',
+  data () {
+    return {
+      isPaused: false
+    }
+  },
+  methods: {
+    revertState () {
+      this.isPaused = !this.isPaused
+      this.$emit('clicked', { isPaused: this.isPaused })
+    }
+  },
+  computed: {
+    buttonState () {
+      return this.isPaused ? 'Record' : 'Pause'
     }
   }
+}
 
 </script>
 
@@ -53,7 +53,7 @@
     padding-bottom: 100%;
   }
 
-  .button.paused {
+  .button--paused {
      background-color: green;
     color: white;
    }

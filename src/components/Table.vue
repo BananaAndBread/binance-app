@@ -22,26 +22,26 @@
 </template>
 
 <script>
-  import {Decimal} from 'decimal.js'
-  export default {
-    name: "FirstPage",
-    components: {
-    },
-    data () {
-      return {
-        asks: [],
-        bids: []
-      }
-    },
-    async mounted () {
-      this.Decimal = Decimal
-      const data = await this.$core.sdk.getInfo()
-      this.asks = data.asks
-      this.bids = data.bids
-    },
-    methods: {
+import { Decimal } from 'decimal.js'
+export default {
+  name: 'FirstPage',
+  components: {
+  },
+  data () {
+    return {
+      asks: [],
+      bids: []
     }
+  },
+  async mounted () {
+    this.Decimal = Decimal
+    const data = await this.$core.sdk.getInfo()
+    this.asks = data.asks
+    this.bids = data.bids
+  },
+  methods: {
   }
+}
 
 </script>
 
@@ -62,6 +62,5 @@
       display:none
     }
   }
-
 
 </style>

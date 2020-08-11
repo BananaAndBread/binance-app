@@ -7,22 +7,22 @@
 </template>
 
 <script>
-  export default {
-    name: "DropDown",
-    data () {
-      return {
-        symbols: ['BTCUSDT', 'BNBBTC', 'ETHBTC'],
-        chosenSymbol: 'BTCUSDT'
-      }
-    },
-    methods: {
-      handleClick (symbol) {
-        this.chosenSymbol = symbol
-        this.$core.sdk.changeSymbol(this.chosenSymbol)
-        this.$core.eventBus.$emit('symbolChanged')
-      }
+export default {
+  name: 'DropDown',
+  data () {
+    return {
+      symbols: ['BTCUSDT', 'BNBBTC', 'ETHBTC'],
+      chosenSymbol: 'BTCUSDT'
+    }
+  },
+  methods: {
+    handleClick (symbol) {
+      this.chosenSymbol = symbol
+      this.$core.sdk.changeSymbol(this.chosenSymbol)
+      this.$core.eventBus.$emit('symbolChanged')
     }
   }
+}
 </script>
 
 <style>

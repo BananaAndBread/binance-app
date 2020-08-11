@@ -2,16 +2,16 @@
   <div class="wrapper">
     <perfect-scrollbar>
     <div class='tables'>
-    <table class='table tables__table' :key="tableIndex" v-for="(table, tableIndex) in [asks, bids]">
+    <table class='table tables__table' v-bind:key="tableIndex" v-for="(table, tableIndex) in [asks, bids]">
       <thead>
       <tr>
-        <th scope="col">Amount</th>
-        <th scope="col">Price</th>
-        <th scope="col" class="column column--big-screen">Total</th>
+        <th class='table__th' scope="col">Amount</th>
+        <th class='table__th' scope="col">Price</th>
+        <th scope="col" class="column column--big-screen table__th">Total</th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(item, index) in table" :key="index">
+      <tr v-for="(item, index) in table" v-bind:key="index">
         <td>{{Decimal(item[1])}}</td> <td>{{Decimal(item[0])}}</td> <td class="column column--big-screen">{{Decimal(item[1]*item[0])}}</td>
       </tr>
       </tbody>
@@ -61,6 +61,11 @@ export default {
     .column--big-screen{
       display:none
     }
+  }
+  .table__th{
+    position: sticky;
+    top:0;
+    background-color: white;
   }
 
 </style>

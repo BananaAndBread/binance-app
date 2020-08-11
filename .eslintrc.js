@@ -6,14 +6,16 @@ module.exports = {
   extends: [
     'plugin:vue/essential',
     'standard',
-    'plugin:vue/recommended'
+    'plugin:vue/recommended',
+    'plugin:vue/base'
   ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'
   },
-  parser: 'babel-eslint',
+  parser: 'vue-eslint-parser',
   parserOptions: {
+    parser: 'babel-eslint',
     ecmaVersion: 2018,
     sourceType: 'module'
   },

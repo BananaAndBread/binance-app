@@ -5,7 +5,8 @@ module.exports = {
   },
   extends: [
     'plugin:vue/essential',
-    'standard'
+    'standard',
+    'plugin:vue/recommended'
   ],
   globals: {
     Atomics: 'readonly',

@@ -1,7 +1,7 @@
 <template>
   <div>
     <DropDown class="second-page__drop-down"></DropDown>
-    <hr>
+    <hr/>
     <DiffsList class="second-page__diff-list"></DiffsList>
   </div>
 </template>

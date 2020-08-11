@@ -7,15 +7,15 @@
 </template>
 
 <script>
-  import DiffsList from "../components/DiffsList";
-  import DropDown from "../components/DropDown";
-  export default {
-    name: "SecondPage",
-    components: {
-      DropDown,
-      DiffsList,
-    }
+import DiffsList from '../components/DiffsList'
+import DropDown from '../components/DropDown'
+export default {
+  name: 'SecondPage',
+  components: {
+    DropDown,
+    DiffsList
   }
+}
 </script>
 
 <style>

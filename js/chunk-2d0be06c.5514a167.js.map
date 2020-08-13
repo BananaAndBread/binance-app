@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./plugins/eventBus.js"],"names":["EventBus","Vue"],"mappings":"kHAAA,uBACMA,EAAW,IAAIC,aACND","file":"js/chunk-2d0be06c.5514a167.js","sourcesContent":["import Vue from 'vue'\nconst EventBus = new Vue()\nexport default EventBus\n"],"sourceRoot":""}

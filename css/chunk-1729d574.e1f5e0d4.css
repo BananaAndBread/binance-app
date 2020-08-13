@@ -1,0 +1,1 @@
+.tables{display:grid;grid-template-columns:1fr 1fr;height:90vh;width:100%;grid-column-gap:1em}@media (max-width:500px){.column--big-screen{display:none}}.table__th{position:-webkit-sticky;position:sticky;top:0;background-color:#fff}

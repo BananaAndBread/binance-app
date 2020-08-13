@@ -43,7 +43,6 @@ export default {
         this.stopListen()
       } else {
         this.startListenData()
-        console.log('make this stop!!!')
       }
     },
     dataListener (payload) {

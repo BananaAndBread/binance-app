@@ -20,7 +20,16 @@ const core = new Core([{ name: 'eventBus' }, { name: 'sdk' }]);
   await core.install()
   core.sdk.setOnMessage((e) => {
     const data = JSON.parse(e.data)
-    core.eventBus.$emit('recievedData', data)
+    if (core.sdk.firstMessage && core.sdk.lastUpdateId) {
+      if (data.U <= core.sdk.lastUpdateId + 1 && data.u >= core.sdk.lastUpdateId + 1) {
+        core.eventBus.$emit('recievedData', data)
+        core.sdk.lastEventu = data.u
+      }
+    }
+    if (data.U === core.sdk.lastEventu + 1) {
+      core.eventBus.$emit('recievedData', data)
+      core.sdk.lastEventu = data.u
+    }
   })
   Vue.prototype.$core = core
   new Vue({

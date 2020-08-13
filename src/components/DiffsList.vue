@@ -1,23 +1,34 @@
 <template>
   <div class="diff-list">
     <div class="diff-list__header">
-      <PlayPauseButton @clicked="handleClick" class="diff-list__play-button"></PlayPauseButton>
-    <h4 class="diff-list__header__title">[Price level to be updated, Quantity] changes </h4>
+      <PlayPauseButton
+        class="diff-list__play-button"
+        @clicked="handleClick"
+      />
+      <h4 class="diff-list__header__title">
+        [Price level to be updated, Quantity] changes
+      </h4>
     </div>
-  <div class="diff-list__lists">
-    <h4>Bids to be updated</h4>
-    <h4>Asks to be updated</h4>
-  <b-list-group>
-    <b-list-group-item :key="index" v-for="(diffBid, index) in diffsBids">
-      <p>{{diffBid}}</p>
-    </b-list-group-item>
-  </b-list-group>
-  <b-list-group>
-    <b-list-group-item :key="index" v-for="(diffAsk, index) in diffsAsks">
-      <p>{{diffAsk}}</p>
-    </b-list-group-item>
-  </b-list-group>
-  </div>
+    <div class="diff-list__lists">
+      <h4>Bids to be updated</h4>
+      <h4>Asks to be updated</h4>
+      <b-list-group>
+        <b-list-group-item
+          v-for="(diffBid, index) in lastDiffBids"
+          :key="index"
+        >
+          <p>{{ diffBid }}</p>
+        </b-list-group-item>
+      </b-list-group>
+      <b-list-group>
+        <b-list-group-item
+          v-for="(diffAsk, index) in lastDiffAsks"
+          :key="index"
+        >
+          <p>{{ diffAsk }}</p>
+        </b-list-group-item>
+      </b-list-group>
+    </div>
   </div>
 </template>
 
@@ -28,8 +39,8 @@ export default {
   components: { PlayPauseButton },
   data () {
     return {
-      diffsBids: [],
-      diffsAsks: []
+      lastDiffBids: [],
+      lastDiffAsks: []
 
     }
   },
@@ -46,16 +57,8 @@ export default {
       }
     },
     dataListener (payload) {
-      const lastDiffBids = payload.b
-      const lastDiffAsks = payload.a
-      if (this.diffsAsks.length === 10) {
-        this.diffsAsks.pop()
-      }
-      if (this.diffsBids.length === 10) {
-        this.diffsBids.pop()
-      }
-      this.diffsBids.unshift(lastDiffBids)
-      this.diffsAsks.unshift(lastDiffAsks)
+      this.lastDiffBids = payload.b
+      this.lastDiffAsks = payload.a
     },
     startListenSymbolChange () {
       this.$core.eventBus.$on('symbolChanged', this.refresh)
@@ -67,8 +70,8 @@ export default {
       this.$core.eventBus.$on('recievedData', this.dataListener)
     },
     refresh () {
-      this.diffsBids = []
-      this.diffsAsks = []
+      this.lastDiffBids = []
+      this.lastDiffAsks = []
     }
 
   }
